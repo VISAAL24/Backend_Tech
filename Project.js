@@ -7,7 +7,8 @@ const app = express();
 const router = express.Router();
 
 const url = "mongodb://localhost:27017/Project_Backend";
-const JWT_SECRET = "HelloWorld";
+
+const JWT_SECRET = process.env.JWT_SECRET || "change_this_secret";
 app.use(express.json()); //middleware
 
 //MongoDB connection
@@ -53,7 +54,6 @@ const personSchema = new mongoose.Schema({
 
 const Person = mongoose.model("Marks",personSchema);
 
-JWT_SECRET = process.env.JWT_SECRET || "change_this_secret";
 
 const authMiddleware = (req,res,next)=>{
     const authHeader = req.headers.authorization;
